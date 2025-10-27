@@ -4,18 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Steam Library — Игры</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      padding: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    li {
+      margin: 8px 0;
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+  </style>
 </head>
-<body style="font-family: Arial, sans-serif; background-color: #121212; color: #ffffff; padding: 20px;">
-  <h1>🎮 Steam Library — список игр</h1>
-  <p>Это тестовая страница. Позже тут появятся настоящие данные из Steam.</p>
+<body>
+  <h1>🎮 Steam Library — тестовая база игр</h1>
+  <p>Ищи любую игру по названию:</p>
 
-  <ul>
+  <input type="text" id="searchInput" placeholder="Начни вводить название...">
+
+  <ul id="gameList">
     <li>Cyberpunk 2077 — CD Projekt Red</li>
     <li>Hades — Supergiant Games</li>
     <li>Elden Ring — FromSoftware</li>
     <li>Baldur’s Gate 3 — Larian Studios</li>
+    <li>Stardew Valley — ConcernedApe</li>
+    <li>Helldivers 2 — Arrowhead Game Studios</li>
   </ul>
 
-  <a href="index.html" style="color: #00ffcc; text-decoration: none;">⬅ Назад на главную</a>
+  <a href="index.html">⬅ Назад на главную</a>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const gameList = document.getElementById("gameList");
+    const games = Array.from(gameList.getElementsByTagName("li"));
+
+    searchInput.addEventListener("input", () => {
+      const value = searchInput.value.toLowerCase();
+      games.forEach(li => {
+        const text = li.textContent.toLowerCase();
+        li.style.display = text.includes(value) ? "" : "none";
+      });
+    });
+  </script>
 </body>
 </html>
