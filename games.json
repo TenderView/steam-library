@@ -91,24 +91,24 @@
     ],
     "description": "Forza Horizon 5 — самая масштабная и разнообразная игра серии Horizon, действие которой происходит в захватывающих пейзажах Мексики.",
     "badge": "new"
-  },
-  {
+  },{
     "id": 6,
     "name": "Counter-Strike 2",
     "genre": "Шутер",
     "price": "free",
     "release_date": "2023-09-27",
     "rating": "8/10",
-    "cover": "https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg",
+    "cover": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg",
     "gpu": "GTX 1060",
     "cpu": "Intel Core i5",
     "ram": "8 GB",
     "screenshots": [
-      "https://cdn.akamai.steamstatic.com/steam/apps/730/ss_1.jpg",
-      "https://cdn.akamai.steamstatic.com/steam/apps/730/ss_2.jpg",
-      "https://cdn.akamai.steamstatic.com/steam/apps/730/ss_3.jpg"
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/730/ss_1.jpg",
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/730/ss_2.jpg",
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/730/ss_3.jpg",
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/730/ss_4.jpg",
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/730/ss_5.jpg"
     ],
-    "description": "Counter-Strike 2 — это крупнейший технологический скачок в истории CS, с новыми возможностями и обновлениями.",
+    "description": "Counter-Strike 2 — это крупнейший технологический скачок в истории CS, с новыми возможностями и обновлениями. Игроки смогут насладиться улучшенной графикой, оптимизированным геймплеем и поддержкой новых карт.",
     "badge": "popular"
-  }
-]
+}
