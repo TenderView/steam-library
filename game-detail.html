@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Детали игры</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="detail-container">
+  <button onclick="window.history.back()">⬅ Назад</button>
+  <div class="detail-header">
+    <img id="gameCover" src="" alt="">
+    <div class="detail-info">
+      <h2 id="gameName"></h2>
+      <p id="gameGenre"></p>
+      <p id="gamePrice"></p>
+      <p id="gameRelease"></p>
+      <p id="gameRating"></p>
+      <p id="gpuCheck"></p>
+      <p id="cpuInfo"></p>
+      <p id="ramInfo"></p>
+    </div>
+  </div>
+  <div class="comments-section">
+    <h4>Комментарии:</h4>
+    <ul class="comments-list"></ul>
+    <input type="text" class="comment-input" placeholder="Написать комментарий...">
+    <button class="add-comment">Добавить</button>
+  </div>
+</div>
 
+<script>
+// ====== ДАННЫЕ ИГР ======
+const gamesData = [
+  {
+    name: "Elden Ring",
+    genre: "РПГ",
+    gpu: "RTX 2060",
+    price: "paid",
+    release_date: "2022-02-25",
+    rating: "9/10",
+    cover: "https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg",
+    cpu: "Intel i5",
+    ram: "16GB"
+  },
+  {
+    name: "Cyberpunk 2077",
+    genre: "Ролевые экшены",
+    gpu: "RTX 2060",
+    price: "paid",
+    release_date: "2020-12-10",
+    rating: "7/10",
+    cover: "https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg",
+    cpu: "Intel i7",
+    ram: "16GB"
+  }
+];
+
+// ====== ПОЛУЧЕНИЕ ИГРЫ ПО URL ======
+const params = new URLSearchParams(window.location.search);
+const gameName = params.get('name');
+const game = gamesData.find(g=>g.name===gameName);
+
+if(game){
+  document.getElementById('gameCover').src=game.cover;
+  document.getElementById('gameName').textContent=game.name;
+  document.getElementById('gameGenre').textContent='Жанр: '+game.genre;
+  document.getElementById('gamePrice').textContent='Цена: '+game.price;
+  document.getElementById('gameRelease').textContent='Дата выхода: '+game.release_date;
+  document.getElementById('gameRating').textContent='Оценка: '+game.rating;
+  document.getElementById('cpuInfo').textContent='CPU: '+game.cpu;
+  document.getElementById('ramInfo').textContent='RAM: '+game.ram;
+
+  // Проверка совместимости GPU (можно менять текущую карту)
+  const userGpu="GTX 1060"; // Пример выбранной карты
+  if(game.gpu===userGpu){
+    document.getElementById('gpuCheck').textContent='Совместимо с вашей картой';
+    document.getElementById('gpuCheck').className='compatible';
+  } else {
+    document.getElementById('gpuCheck').textContent='Не совместимо с вашей картой';
+    document.getElementById('gpuCheck').className='not-compatible';
+  }
+
+  // Добавление комментариев
+  document.querySelector('.add-comment').addEventListener('click', ()=>{
+    const input=document.querySelector('.comment-input');
+    const text=input.value.trim();
+    if(text){
+      const li=document.createElement('li');
+      li.textContent=text;
+      document.querySelector('.comments-list').appendChild(li);
+      input.value='';
+    }
+  });
+}
+</script>
+</body>
+</html>
