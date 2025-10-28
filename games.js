@@ -1,126 +1,93 @@
-// ====== ДАННЫЕ ИГР ======
+// Список всех игр (пример)
 const gamesData = [
+  {
+    name: "Cyberpunk 2077",
+    genre: "Ролевые экшены",
+    price: "paid",
+    release_date: "2020-12-10",
+    rating: "7/10",
+    cover: "https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg",
+    gpu: "RTX 2060",
+    cpu: "Intel i7",
+    ram: "16GB"
+  },
   {
     name: "Elden Ring",
     genre: "РПГ",
-    gpu: "RTX 2060",
     price: "paid",
     release_date: "2022-02-25",
-    rating: 9.0,
+    rating: "9/10",
     cover: "https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg",
+    gpu: "RTX 2060",
     cpu: "Intel i5",
     ram: "16GB"
   },
   {
-    name: "Cyberpunk 2077",
-    genre: "Ролевые экшены",
-    gpu: "RTX 2060",
+    name: "Hollow Knight",
+    genre: "Приключенческая ролевая игра",
     price: "paid",
-    release_date: "2020-12-10",
-    rating: 7.0,
-    cover: "https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg",
-    cpu: "Intel i7",
+    release_date: "2017-02-26",
+    rating: "9/10",
+    cover: "https://cdn.akamai.steamstatic.com/steam/apps/367520/header.jpg",
+    gpu: "GTX 1050",
+    cpu: "Intel i5",
+    ram: "8GB"
+  },
+  {
+    name: "StarCraft II",
+    genre: "Стратегии в реальном времени",
+    price: "free",
+    release_date: "2018-11-21",
+    rating: "8/10",
+    cover: "https://cdn.akamai.steamstatic.com/steam/apps/393380/header.jpg",
+    gpu: "GTX 750",
+    cpu: "Intel i3",
+    ram: "4GB"
+  },
+  {
+    name: "Forza Horizon 5",
+    genre: "Гонки",
+    price: "paid",
+    release_date: "2023-02-08",
+    rating: "9/10",
+    cover: "https://cdn.akamai.steamstatic.com/steam/apps/1551360/header.jpg",
+    gpu: "RTX 3060",
+    cpu: "Intel i5",
     ram: "16GB"
   }
-  // Добавляй сюда свои игры
+  // Добавляй остальные игры сюда
 ];
 
-// ====== ЭЛЕМЕНТЫ ======
-const searchInput = document.getElementById("searchInput");
-const genreSelect = document.getElementById("genre");
-const gpuSelect = document.getElementById("gpu");
-const priceSelect = document.getElementById("price");
-const sortSelect = document.getElementById("sort");
-const resetBtn = document.getElementById("resetBtn");
-const gameList = document.getElementById("gameList");
-const pagination = document.getElementById("pagination");
+// Функция для создания карточки игры
+function createGameCard(game) {
+  const li = document.createElement("li");
+  li.className = "game-card";
 
-// ====== Заполняем фильтры ======
-const allGenres = [...new Set(gamesData.map(g => g.genre))];
-allGenres.forEach(g => genreSelect.innerHTML += `<option value="${g}">${g}</option>`);
+  // Сохраняем данные для деталей
+  li.dataset.name = game.name;
+  li.dataset.genre = game.genre;
+  li.dataset.price = game.price;
+  li.dataset.release_date = game.release_date;
+  li.dataset.rating = game.rating;
+  li.dataset.cover = game.cover;
+  li.dataset.gpu = game.gpu;
+  li.dataset.cpu = game.cpu;
+  li.dataset.ram = game.ram;
 
-const allGpus = [...new Set(gamesData.map(g => g.gpu))];
-allGpus.forEach(g => gpuSelect.innerHTML += `<option value="${g}">${g}</option>`);
+  li.innerHTML = `
+    <img src="${game.cover}" alt="${game.name}">
+    <h3>${game.name}</h3>
+    <p>Жанр: ${game.genre}</p>
+    <p>Цена: ${game.price === "paid" ? "Платная" : "Бесплатная"}</p>
+    <p>Дата выхода: ${game.release_date}</p>
+  `;
 
-// ====== Пагинация ======
-let currentPage = 1;
-const perPage = 15;
-
-// ====== Отображение игр ======
-function displayGames() {
-  const searchValue = searchInput.value.toLowerCase();
-  const genre = genreSelect.value;
-  const gpu = gpuSelect.value;
-  const price = priceSelect.value;
-  const sortOrder = sortSelect.value;
-
-  let filtered = gamesData.filter(game => 
-    game.name.toLowerCase().includes(searchValue) &&
-    (!genre || game.genre === genre) &&
-    (!gpu || game.gpu === gpu) &&
-    (!price || game.price === price)
-  );
-
-  filtered.sort((a,b) => {
-    if(sortOrder === "rating") return b.rating - a.rating;
-    const dateA = new Date(a.release_date);
-    const dateB = new Date(b.release_date);
-    return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+  // Переход на страницу деталей
+  li.addEventListener("click", () => {
+    // Сохраняем данные выбранной игры в localStorage
+    localStorage.setItem("selectedGame", JSON.stringify(game));
+    window.location.href = "game-detail.html";
   });
 
-  const totalPages = Math.ceil(filtered.length / perPage);
-  if(currentPage > totalPages) currentPage = 1;
-
-  gameList.innerHTML = '';
-  filtered.slice((currentPage-1)*perPage, currentPage*perPage).forEach(game => {
-    const li = document.createElement('li');
-    li.className = 'game-card';
-    li.innerHTML = `
-      <img src="${game.cover}" alt="${game.name}" class="game-cover">
-      <div class="game-info">
-        <h3>${game.name}</h3>
-        <p>Жанр: ${game.genre}</p>
-        <p>Цена: ${game.price}</p>
-        <p>Рейтинг: ${game.rating}/10</p>
-      </div>
-    `;
-
-    // Совместимость GPU (пример)
-    const userGpu = "GTX 1060"; // позже можно сделать выбор пользователем
-    const compat = document.createElement('p');
-    compat.textContent = (game.gpu===userGpu) ? "Совместимо" : "Не совместимо";
-    compat.style.color = (game.gpu===userGpu) ? "#00ffcc" : "red";
-    li.querySelector('.game-info').appendChild(compat);
-
-    li.addEventListener('click', ()=> {
-      window.location.href = `game-detail.html?name=${encodeURIComponent(game.name)}`;
-    });
-
-    gameList.appendChild(li);
-  });
-
-  // Пагинация
-  pagination.innerHTML = '';
-  for(let i=1;i<=totalPages;i++){
-    const btn = document.createElement('button');
-    btn.textContent = i;
-    if(i===currentPage) btn.style.backgroundColor="#00ffcc";
-    btn.addEventListener('click', ()=> { currentPage=i; displayGames(); });
-    pagination.appendChild(btn);
-  }
+  return li;
 }
-
-// ====== События ======
-searchInput.addEventListener('input', ()=>{currentPage=1; displayGames();});
-genreSelect.addEventListener('change', ()=>{currentPage=1; displayGames();});
-gpuSelect.addEventListener('change', ()=>{currentPage=1; displayGames();});
-priceSelect.addEventListener('change', ()=>{currentPage=1; displayGames();});
-sortSelect.addEventListener('change', ()=>{currentPage=1; displayGames();});
-resetBtn.addEventListener('click', ()=>{
-  searchInput.value=''; genreSelect.value=''; gpuSelect.value=''; priceSelect.value=''; sortSelect.value='newest';
-  currentPage=1;
-  displayGames();
-});
-
-// ====== Инициализация ======
-displayGames();
