@@ -1,4 +1,3 @@
-```javascript
 // main.js - логика фильтрации, пагинации и управления UI
 const ITEMS_PER_PAGE = 6;
 let currentPage = 1;
@@ -156,4 +155,3 @@ function setupEventListeners() {
     renderPage(currentPage);
   });
 }
-```
