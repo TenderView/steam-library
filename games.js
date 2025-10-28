@@ -1,92 +1,54 @@
-// games.js - данные игр и создание карточек
-const gamesData = [
-  {
-    name: "Cyberpunk 2077",
-    genre: "Ролевые экшены",
-    price: "paid",
-    release_date: "2020-12-10",
-    rating: "7/10",
-    cover: "https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg",
-    gpu: "RTX 2060",
-    cpu: "Intel i7",
-    ram: "16GB",
-    screenshots: [
-      "https://cdn.akamai.steamstatic.com/steam/apps/1091500/ss_1.jpg",
-      "https://cdn.akamai.steamstatic.com/steam/apps/1091500/ss_2.jpg"
-    ]
-  },
-  {
-    name: "Elden Ring",
-    genre: "РПГ",
-    price: "paid",
-    release_date: "2022-02-25",
-    rating: "9/10",
-    cover: "https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg",
-    gpu: "RTX 2060",
-    cpu: "Intel i5",
-    ram: "16GB",
-    screenshots: [
-      "https://cdn.akamai.steamstatic.com/steam/apps/1245620/ss_1.jpg",
-      "https://cdn.akamai.steamstatic.com/steam/apps/1245620/ss_2.jpg"
-    ]
-  },
-  {
-    name: "Hollow Knight",
-    genre: "Приключенческая ролевая игра",
-    price: "paid",
-    release_date: "2017-02-26",
-    rating: "9/10",
-    cover: "https://cdn.akamai.steamstatic.com/steam/apps/367520/header.jpg",
-    gpu: "GTX 1050",
-    cpu: "Intel i5",
-    ram: "8GB",
-    screenshots: [
-      "https://cdn.akamai.steamstatic.com/steam/apps/367520/ss_1.jpg",
-      "https://cdn.akamai.steamstatic.com/steam/apps/367520/ss_2.jpg"
-    ]
-  },
-  {
-    name: "StarCraft II",
-    genre: "Стратегии в реальном времени",
-    price: "free",
-    release_date: "2018-11-21",
-    rating: "8/10",
-    gpu: "GTX 750",
-    cpu: "Intel i5",
-    ram: "8GB",
-    cover: "https://cdn.akamai.steamstatic.com/steam/apps/58190/header.jpg",
-    screenshots: [
-      "https://cdn.akamai.steamstatic.com/steam/apps/58190/ss_1.jpg",
-      "https://cdn.akamai.steamstatic.com/steam/apps/58190/ss_2.jpg"
-    ]
-  },
-  {
-    name: "Forza Horizon 5",
-    genre: "Гонки",
-    price: "paid",
-    release_date: "2023-02-08",
-    rating: "9/10",
-    cover: "https://cdn.akamai.steamstatic.com/steam/apps/1551360/header.jpg",
-    gpu: "RTX 3060",
-    cpu: "Intel i5",
-    ram: "16GB",
-    screenshots: [
-      "https://cdn.akamai.steamstatic.com/steam/apps/1551360/ss_1.jpg",
-      "https://cdn.akamai.steamstatic.com/steam/apps/1551360/ss_2.jpg"
-    ]
-  }
-];
+let gamesData = [];
+
+// Загружаем данные из games.json
+fetch('games.json')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    gamesData = data;
+    // После загрузки данных инициализируем страницу
+    if (typeof initializePage === 'function') {
+      initializePage();
+    }
+  })
+  .catch(error => {
+    console.error('Error loading games data:', error);
+    // Fallback - если JSON не загрузился, используем тестовые данные
+    gamesData = [
+      {
+        name: "Test Game",
+        genre: "Экшен",
+        price: "paid",
+        release_date: "2023-01-01",
+        rating: "8/10",
+        cover: "https://via.placeholder.com/300x400/1e1e1e/00ffcc?text=Test+Game",
+        gpu: "GTX 1060",
+        cpu: "Intel i5",
+        ram: "8GB"
+      }
+    ];
+    if (typeof initializePage === 'function') {
+      initializePage();
+    }
+  });
 
 // Функция для создания карточки игры
 function createGameCard(game) {
   const li = document.createElement("li");
   li.className = "game-card";
+  
   li.innerHTML = `
-    <img src="${game.cover}" alt="${game.name}" onerror="this.src='https://via.placeholder.com/300x400?text=No+Image'">
+    <img src="${game.cover}" alt="${game.name}" 
+         onerror="this.src='https://via.placeholder.com/300x400/1e1e1e/00ffcc?text=No+Image'">
     <h3>${game.name}</h3>
-    <p>Жанр: ${game.genre}</p>
-    <p>Цена: ${game.price === "paid" ? "Платная" : "Бесплатная"}</p>
-    <p>Рейтинг: ${game.rating}</p>
+    <p><strong>Жанр:</strong> ${game.genre}</p>
+    <p><strong>Цена:</strong> ${game.price === "paid" ? "💲 Платная" : "🆓 Бесплатная"}</p>
+    <p><strong>Рейтинг:</strong> ${game.rating}</p>
+    <p><strong>Дата выхода:</strong> ${new Date(game.release_date).toLocaleDateString('ru-RU')}</p>
   `;
 
   li.addEventListener("click", () => {
