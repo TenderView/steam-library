@@ -433,3 +433,204 @@ button:hover {
     grid-template-columns: 1fr;
   }
 }
+/* Стили для карусели скриншотов */
+.screenshots-section {
+  margin-top: 20px;
+}
+
+.screenshots-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--card-bg);
+  padding: 10px;
+}
+
+.screenshots-track {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.screenshot-slide {
+  min-width: 100%;
+  text-align: center;
+}
+
+.screenshot-slide img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.screenshot-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 255, 204, 0.8);
+  border: none;
+  color: #000;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+
+.screenshot-nav:hover {
+  background: var(--primary-color);
+}
+
+.screenshot-prev {
+  left: 10px;
+}
+
+.screenshot-next {
+  right: 10px;
+}
+
+.screenshots-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 5px;
+}
+
+.screenshot-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: #333;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.screenshot-dot.active {
+  background: var(--primary-color);
+}
+
+/* Стили для пользовательского рейтинга */
+.user-rating {
+  margin: 15px 0;
+  padding: 10px;
+  background: var(--card-bg);
+  border-radius: 5px;
+}
+
+.user-rating-stars {
+  display: flex;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.rating-star {
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s;
+  color: #555;
+}
+
+.rating-star.active,
+.rating-star.highlight {
+  color: #ffd700;
+}
+
+.rating-star:hover {
+  color: #ffed4a;
+}
+
+/* Стили для расширенных фильтров */
+.advanced-filters {
+  margin: 15px 0;
+  padding: 15px;
+  background: var(--card-bg);
+  border-radius: 10px;
+}
+
+.advanced-filters h4 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.date-filters {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.date-filters input {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  background: var(--bg-dark);
+  color: var(--text-color);
+}
+
+/* Индикатор загрузки */
+.loading-indicator {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-secondary);
+}
+
+.loading-spinner {
+  border: 3px solid #333;
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Анимации */
+.game-card {
+  transition: all 0.3s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 255, 204, 0.3);
+}
+
+.filters select, .filters input {
+  transition: all 0.2s ease;
+}
+
+.filters select:focus, .filters input:focus {
+  outline: 2px solid var(--primary-color);
+  transform: scale(1.05);
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .screenshot-nav {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .filter-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .date-filters {
+    justify-content: center;
+  }
+  
+  .advanced-filters {
+    padding: 10px;
+  }
+}
