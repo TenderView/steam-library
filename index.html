@@ -1,25 +1,82 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Steam Library Tracker</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steam Library Tracker - Ваш каталог игр</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
-    <h1>🎮 Steam Library Tracker</h1>
-  </header>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">🎮</span>
+                    <span class="logo-text">SteamTracker</span>
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link active">Главная</a>
+                    <a href="games.html" class="nav-link">Каталог игр</a>
+                    <a href="settings.html" class="nav-link">Настройки</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-  <main class="main-content">
-    <h2>Твой каталог игр в стиле Steam</h2>
-    <p>Ищи игры по жанру, цене и требованиям к видеокарте.  
-       Переходи к списку игр, выбирай фильтры и смотри подробности каждой игры.</p>
-    <a class="start-btn" href="games.html">Перейти к играм</a>
-  </main>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Найдите идеальную игру</h1>
+                <p class="hero-subtitle">
+                    Умный каталог игр с проверкой совместимости. Узнайте, какие игры будут работать 
+                    на вашем ПК перед покупкой.
+                </p>
+                <div class="hero-actions">
+                    <a href="games.html" class="btn btn-primary">Перейти к играм</a>
+                    <a href="settings.html" class="btn btn-secondary">Настроить совместимость</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer class="footer">
-    © 2025 Steam Library Tracker. Все права защищены.
-  </footer>
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">Умный поиск</h3>
+                    <p class="feature-description">
+                        Фильтруйте игры по жанру, системным требованиям, цене и рейтингу. 
+                        Находите именно то, что вам нужно.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Проверка совместимости</h3>
+                    <p class="feature-description">
+                        Узнайте, какие игры будут работать на вашем ПК. Наша система анализирует 
+                        ваше железо и показывает совместимость.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3 class="feature-title">Сообщество</h3>
+                    <p class="feature-description">
+                        Читайте и оставляйте отзывы о играх. Делитесь опытом с другими 
+                        игроками.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Steam Library Tracker. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="games.js"></script>
 </body>
 </html>
