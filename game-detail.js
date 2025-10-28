@@ -135,3 +135,91 @@ function goToScreenshot(index) {
   currentScreenshotIndex = index;
   updateScreenshotsTrack();
 }
+// Система пользовательского рейтинга
+function setupUserRating(gameName) {
+  const ratingContainer = document.getElementById('userRating');
+  if (!ratingContainer) return;
+  
+  const userRatings = JSON.parse(localStorage.getItem(`ratings_${gameName}`)) || { total: 0, sum: 0 };
+  const userVote = localStorage.getItem(`userVote_${gameName}`);
+  
+  updateRatingDisplay(userRatings, userVote);
+  
+  // Создаем звезды для голосования
+  const starsContainer = document.createElement('div');
+  starsContainer.className = 'user-rating-stars';
+  
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement('span');
+    star.className = 'rating-star';
+    star.innerHTML = '☆';
+    star.dataset.rating = i;
+    
+    if (userVote && i <= userVote) {
+      star.innerHTML = '★';
+      star.classList.add('active');
+    }
+    
+    star.addEventListener('click', () => voteForGame(gameName, i, userRatings));
+    star.addEventListener('mouseover', () => highlightStars(i));
+    starsContainer.appendChild(star);
+  }
+  
+  ratingContainer.appendChild(starsContainer);
+  
+  // Сбрасываем подсветку при уходе мыши
+  starsContainer.addEventListener('mouseleave', () => {
+    highlightStars(userVote || 0);
+  });
+}
+
+function highlightStars(rating) {
+  const stars = document.querySelectorAll('.rating-star');
+  stars.forEach((star, index) => {
+    if (index < rating) {
+      star.innerHTML = '★';
+      star.classList.add('highlight');
+    } else {
+      star.innerHTML = '☆';
+      star.classList.remove('highlight');
+    }
+  });
+}
+
+function voteForGame(gameName, rating, userRatings) {
+  const previousVote = localStorage.getItem(`userVote_${gameName}`);
+  
+  if (previousVote) {
+    userRatings.sum -= parseInt(previousVote);
+    userRatings.total -= 1;
+  }
+  
+  userRatings.sum += rating;
+  userRatings.total += 1;
+  
+  localStorage.setItem(`ratings_${gameName}`, JSON.stringify(userRatings));
+  localStorage.setItem(`userVote_${gameName}`, rating.toString());
+  
+  updateRatingDisplay(userRatings, rating);
+  highlightStars(rating);
+}
+
+function updateRatingDisplay(ratings, userVote) {
+  const ratingValue = document.getElementById('userRatingValue');
+  const ratingCount = document.getElementById('userRatingCount');
+  
+  if (ratingValue) {
+    const average = ratings.total > 0 ? (ratings.sum / ratings.total).toFixed(1) : '0.0';
+    ratingValue.textContent = `${average}/5`;
+  }
+  
+  if (ratingCount) {
+    ratingCount.textContent = `(${ratings.total} голосов)`;
+  }
+  
+  // Обновляем звезды
+  const stars = document.querySelectorAll('.rating-star');
+  stars.forEach((star, index) => {
+    star.classList.toggle('active', userVote && index < userVote);
+  });
+}
