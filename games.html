@@ -1,73 +1,150 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Steam Library — Игры</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог игр - Steam Library Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1 class="page-title">🎮 Steam Library Tracker</h1>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">🎮</span>
+                    <span class="logo-text">SteamTracker</span>
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="games.html" class="nav-link active">Каталог игр</a>
+                    <a href="settings.html" class="nav-link">Настройки</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-  <div class="header-actions">
-    <a href="settings.html" class="settings-btn">⚙️ Моя видеокарта</a>
-  </div>
+    <main class="container">
+        <section class="filters-section">
+            <div class="filters-header">
+                <h2 class="filters-title">Фильтры и поиск</h2>
+            </div>
 
-  <div class="filters">
-    <input type="text" id="searchInput" placeholder="🔍 Искать игру...">
-    <select id="genreSelect">
-      <option value="">Все жанры</option>
-    </select>
-    <select id="gpuSelect">
-      <option value="">Все видеокарты</option>
-    </select>
-    <select id="priceSelect">
-      <option value="">Все игры</option>
-      <option value="free">🆓 Бесплатные</option>
-      <option value="paid">💲 Платные</option>
-    </select>
-    <select id="sortSelect">
-      <option value="newest">🆕 Сначала новые</option>
-      <option value="oldest">📅 Сначала старые</option>
-    </select>
-    <button id="resetBtn">🔄 Сбросить</button>
-  </div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label class="filter-label">Поиск по названию</label>
+                    <input type="text" id="searchInput" class="filter-input" placeholder="Введите название игры...">
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Жанр</label>
+                    <select id="genreSelect" class="filter-select">
+                        <option value="">Все жанры</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Видеокарта</label>
+                    <select id="gpuSelect" class="filter-select">
+                        <option value="">Все видеокарты</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Цена</label>
+                    <select id="priceSelect" class="filter-select">
+                        <option value="">Все игры</option>
+                        <option value="free">🆓 Бесплатные</option>
+                        <option value="paid">💲 Платные</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Сортировка</label>
+                    <select id="sortSelect" class="filter-select">
+                        <option value="newest">🆕 Сначала новые</option>
+                        <option value="oldest">📅 Сначала старые</option>
+                        <option value="rating">⭐ По рейтингу</option>
+                        <option value="name">🔤 По названию</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">&nbsp;</label>
+                    <button id="resetBtn" class="btn btn-secondary">🔄 Сбросить</button>
+                </div>
+            </div>
 
-  <div id="gamesCount" class="games-count"></div>
+            <!-- Расширенные фильтры -->
+            <div class="advanced-filters">
+                <h3 style="margin-bottom: 1rem; color: var(--text-primary);">Расширенные фильтры</h3>
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label class="filter-label">Процессор</label>
+                        <select id="cpuSelect" class="filter-select">
+                            <option value="">Все процессоры</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Оперативная память</label>
+                        <select id="ramSelect" class="filter-select">
+                            <option value="">Вся память</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Дата выхода от</label>
+                        <input type="date" id="dateFrom" class="filter-input">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Дата выхода до</label>
+                        <input type="date" id="dateTo" class="filter-input">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <ul id="gameList" class="game-list"></ul>
-  <div id="pagination" class="pagination"></div>
+        <section class="games-section">
+            <div class="games-header">
+                <h2 class="games-title">🎮 Доступные игры</h2>
+                <div class="games-counter">
+                    Найдено игр: <span id="gamesCount">0</span>
+                </div>
+            </div>
 
-  <a class="back-link" href="index.html">⬅ Назад на главную</a>
+            <div id="loadingIndicator" class="loading-indicator">
+                <div class="loading-spinner"></div>
+                <p>Загрузка игр...</p>
+            </div>
 
-  <script src="games.js"></script>
-  <script src="main.js"></script>
+            <div id="gamesContainer" style="display: none;">
+                <div class="games-grid" id="gamesGrid">
+                    <!-- Карточки игр будут здесь -->
+                </div>
+                
+                <div class="pagination" id="pagination">
+                    <!-- Пагинация будет здесь -->
+                </div>
+            </div>
+
+            <div id="noGamesMessage" class="no-results" style="display: none;">
+                <div class="no-results-icon">🎮</div>
+                <h3>Игры не найдены</h3>
+                <p>Попробуйте изменить параметры фильтрации</p>
+                <button id="resetFiltersBtn" class="btn btn-primary" style="margin-top: 1rem;">Сбросить фильтры</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Steam Library Tracker. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="games.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
-<!-- Добавляем после существующих фильтров -->
-<div class="advanced-filters">
-  <h4>🔍 Расширенные фильтры:</h4>
-  <div class="filter-group">
-    <select id="cpuSelect">
-      <option value="">Все процессоры</option>
-    </select>
-    
-    <select id="ramSelect">
-      <option value="">Вся память</option>
-    </select>
-    
-    <div class="date-filters">
-      <input type="date" id="dateFrom" placeholder="Дата от">
-      <input type="date" id="dateTo" placeholder="Дата до">
-      <button id="clearDates">🗑️</button>
-    </div>
-  </div>
-</div>
-
-<!-- Обновляем сортировку -->
-<select id="sortSelect">
-  <option value="newest">🆕 Сначала новые</option>
-  <option value="oldest">📅 Сначала старые</option>
-  <option value="rating">⭐ По рейтингу</option>
-  <option value="name">🔤 По названию</option>
-</select>
