@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Steam Library Tracker</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steam Library Tracker</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🎮 Steam Library Tracker</h1>
 
-  <div class="filters">
-    <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
+<h1>🎮 Steam Library Tracker</h1>
 
-    <select id="genre"></select>
-    <select id="gpu"></select>
-    <select id="price">
-      <option value="">Все игры</option>
-      <option value="free">Бесплатные</option>
-      <option value="paid">Платные</option>
-    </select>
+<div class="filters">
+  <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
 
-    <select id="sort">
-      <option value="newest">Новые сверху</option>
-      <option value="oldest">Старые сверху</option>
-    </select>
+  <label for="genre">Жанр:</label>
+  <select id="genre"><option value="">Все жанры</option></select>
 
-    <button id="resetBtn">Сбросить фильтры</button>
-  </div>
+  <label for="gpu">Видеокарта:</label>
+  <select id="gpu"><option value="">Все видеокарты</option></select>
 
-  <ul id="gameList"></ul>
-  <div class="pagination" id="pagination"></div>
+  <label for="price">Цена:</label>
+  <select id="price">
+    <option value="">Все игры</option>
+    <option value="free">Бесплатные</option>
+    <option value="paid">Платные</option>
+  </select>
 
-  <script src="main.js"></script>
+  <label for="sort">Сортировка:</label>
+  <select id="sort">
+    <option value="newest">Новые сверху</option>
+    <option value="oldest">Старые сверху</option>
+    <option value="rating">По рейтингу</option>
+  </select>
+
+  <button id="resetBtn">Сбросить фильтры</button>
+</div>
+
+<ul id="gameList"></ul>
+<div id="pagination"></div>
+
+<script src="games.js"></script>
 </body>
 </html>
