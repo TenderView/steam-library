@@ -1,44 +1,158 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Steam Library Tracker</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam Library — Игры</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="games.js" defer></script>
+  <script src="main.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00ffcc;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .filters select, .filters input, .filters button {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 14px;
+    }
+
+    #gameList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .game-card {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      padding: 10px;
+      width: 200px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+    }
+
+    .game-card img {
+      width: 100%;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+
+    .game-card h3 {
+      margin: 5px 0;
+      font-size: 16px;
+      color: #00ffcc;
+    }
+
+    .game-card p {
+      margin: 2px 0;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    #pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    #pagination button {
+      padding: 6px 12px;
+      border-radius: 5px;
+      border: none;
+      background-color: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #pagination button.active {
+      background-color: #00d1a6;
+    }
+
+    #pagination button:hover {
+      background-color: #00d1a6;
+    }
+
+    a.back-link {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-<h1>🎮 Steam Library Tracker</h1>
+  <h1>🎮 Steam Library Tracker</h1>
 
-<div class="filters">
-  <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
+  <div class="filters">
+    <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
 
-  <label for="genre">Жанр:</label>
-  <select id="genre"><option value="">Все жанры</option></select>
+    <select id="genreSelect">
+      <option value="">Все жанры</option>
+      <!-- Здесь вставляем все жанры, которые ты скинул -->
+    </select>
 
-  <label for="gpu">Видеокарта:</label>
-  <select id="gpu"><option value="">Все видеокарты</option></select>
+    <select id="gpuSelect">
+      <option value="">Все видеокарты</option>
+      <!-- Здесь вставляем все видеокарты от GTX до RTX -->
+    </select>
 
-  <label for="price">Цена:</label>
-  <select id="price">
-    <option value="">Все игры</option>
-    <option value="free">Бесплатные</option>
-    <option value="paid">Платные</option>
-  </select>
+    <select id="priceSelect">
+      <option value="">Все игры</option>
+      <option value="free">Бесплатные</option>
+      <option value="paid">Платные</option>
+    </select>
 
-  <label for="sort">Сортировка:</label>
-  <select id="sort">
-    <option value="newest">Новые сверху</option>
-    <option value="oldest">Старые сверху</option>
-    <option value="rating">По рейтингу</option>
-  </select>
+    <select id="sortSelect">
+      <option value="newest">Новые сверху</option>
+      <option value="oldest">Старые сверху</option>
+    </select>
 
-  <button id="resetBtn">Сбросить фильтры</button>
-</div>
+    <button id="resetBtn">Сбросить фильтры</button>
+  </div>
 
-<ul id="gameList"></ul>
-<div id="pagination"></div>
+  <ul id="gameList"></ul>
+  <div id="pagination"></div>
 
-<script src="games.js"></script>
+  <a class="back-link" href="index.html">⬅ Назад на главную</a>
+
 </body>
 </html>
