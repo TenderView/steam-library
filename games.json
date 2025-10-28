@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Cyberpunk 2077",
+    "genre": "Ролевые экшены",
+    "price": "paid",
+    "release_date": "2020-12-10",
+    "rating": "9/10",
+    "cover": "https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg",
+    "gpu": "RTX 2060",
+    "cpu": "Intel Core i7-4790",
+    "ram": "12 GB",
+    "screenshots": [
+      "https://cdn.akamai.steamstatic.com/steam/apps/1091500/ss_1.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/1091500/ss_2.jpg"
+    ]
+  },
+  {
+    "name": "Elden Ring",
+    "genre": "РПГ",
+    "price": "paid",
+    "release_date": "2022-02-25",
+    "rating": "10/10",
+    "cover": "https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg",
+    "gpu": "GTX 1060",
+    "cpu": "Intel Core i5-8400",
+    "ram": "12 GB",
+    "screenshots": [
+      "https://cdn.akamai.steamstatic.com/steam/apps/1245620/ss_1.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/1245620/ss_2.jpg"
+    ]
+  }
+]
