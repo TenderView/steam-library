@@ -3,148 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Steam Library — Игры</title>
+  <title>Steam Library Tracker</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #121212;
-      color: #ffffff;
+      color: #fff;
+      margin: 0;
       padding: 20px;
     }
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border: none;
+    h1 {
+      text-align: center;
+    }
+    select, input {
+      margin: 10px;
+      padding: 8px;
+      font-size: 14px;
       border-radius: 5px;
-      font-size: 16px;
+      border: none;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
     }
     li {
-      margin: 8px 0;
+      background-color: #1e1e1e;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
     }
-    a {
-      color: #00ffcc;
-      text-decoration: none;
+    .filters {
+      text-align: center;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>🎮 Steam Library — тестовая база игр</h1>
-  <p>Поиск, жанры, цена, дата выхода и минимальные требования по видеокарте:</p>
+  <h1>🎮 Steam Library Tracker</h1>
 
-  <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
-  
-  <select id="genreSelect">
-    <option value="all">Все жанры</option>
-    <option value="action">Action</option>
-    <option value="rpg">RPG</option>
-    <option value="indie">Indie</option>
-    <option value="strategy">Strategy</option>
-  </select>
+  <div class="filters">
+    <label for="genre">Жанр:</label>
+    <select id="genre">
+      <option value="">Все жанры</option>
+      <option>Шутер от первого лица</option>
+      <option>Шутер от третьего лица</option>
+      <option>Слэшеры</option>
+      <option>Аркады и ритм-игры</option>
+      <option>Платформеры и раннеры</option>
+      <option>Shoot 'em up</option>
+      <option>Файтинги и боевые искусства</option>
+      <option>Поиск предметов</option>
+      <option>Казуальные</option>
+      <option>Метроидвания</option>
+      <option>Головоломки</option>
+      <option>Приключенческая ролевая игра</option>
+      <option>Визуальные новеллы</option>
+      <option>Глубокий сюжет</option>
+      <option>Ролевые экшены</option>
+      <option>Стратегии и тактические ролевые</option>
+      <option>Японские ролевые</option>
+      <option>Рогалики и упрощённые рогалики</option>
+      <option>Пошаговые ролевые</option>
+      <option>Групповая ролевая игра</option>
+      <option>Симуляторы строительства и автоматизации</option>
+      <option>Симуляторы хобби и работы</option>
+      <option>Симуляторы свиданий</option>
+      <option>Симуляторы фермерства и крафтинга</option>
+      <option>Симуляторы космоса и полётов</option>
+      <option>Симуляторы жизни и иммерсивные симуляторы</option>
+      <option>Песочницы и симуляторы физики</option>
+      <option>Пошаговые стратегии</option>
+      <option>Стратегии в реальном времени</option>
+      <option>Башенная защита</option>
+      <option>Карточные и настольные</option>
+      <option>Строительство городов и колонизация</option>
+      <option>Глобальные стратегии и 4X-игры</option>
+      <option>Военные стратегии</option>
+      <option>Спортивные симуляторы и менеджеры</option>
+      <option>Гонки</option>
+      <option>Симулятор гонок</option>
+      <option>Охота и рыбалка</option>
+      <option>Командный спорт</option>
+      <option>Индивидуальный спорт</option>
+      <option>Спорт</option>
+    </select>
 
-  <select id="priceSelect">
-    <option value="all">Все игры</option>
-    <option value="free">Бесплатные</option>
-    <option value="paid">Платные</option>
-  </select>
-
-  <select id="gpuSelect">
-    <option value="all">Все видеокарты</option>
-    <option value="gtx1050">GTX 1050</option>
-    <option value="gtx1060">GTX 1060</option>
-    <option value="rtx2060">RTX 2060</option>
-    <option value="rtx3060">RTX 3060</option>
-    <option value="rtx4060">RTX 4060</option>
-    <option value="rtx4070">RTX 4070</option>
-    <option value="rtx5070">RTX 5070</option>
-    <option value="rx6600">Radeon RX 6600</option>
-    <option value="rx7600">Radeon RX 7600</option>
-  </select>
-
-  <select id="sortSelect">
-    <option value="newest">Новые сверху</option>
-    <option value="oldest">Старые сверху</option>
-  </select>
+    <label for="gpu">Видеокарта:</label>
+    <select id="gpu">
+      <option value="">Все видеокарты</option>
+      <option>GTX 750</option>
+      <option>GTX 960</option>
+      <option>GTX 970</option>
+      <option>GTX 1050</option>
+      <option>GTX 1060</option>
+      <option>GTX 1070</option>
+      <option>GTX 1080</option>
+      <option>RTX 2060</option>
+      <option>RTX 2070</option>
+      <option>RTX 2080</option>
+      <option>RTX 3060</option>
+      <option>RTX 3070</option>
+      <option>RTX 3080</option>
+      <option>RTX 4060</option>
+      <option>RTX 4070</option>
+      <option>RTX 4080</option>
+      <option>RTX 5070</option>
+    </select>
+  </div>
 
   <ul id="gameList">
-    <li data-genre="action" data-price="paid" data-date="2020-12-10" data-gpu="rtx2060">Cyberpunk 2077 — требует RTX 2060 (2020)</li>
-    <li data-genre="indie" data-price="paid" data-date="2020-09-17" data-gpu="gtx1050">Hades — требует GTX 1050 (2020)</li>
-    <li data-genre="rpg" data-price="paid" data-date="2022-02-25" data-gpu="rtx3060">Elden Ring — требует RTX 3060 (2022)</li>
-    <li data-genre="rpg" data-price="paid" data-date="2023-08-03" data-gpu="rtx4060">Baldur’s Gate 3 — требует RTX 4060 (2023)</li>
-    <li data-genre="indie" data-price="free" data-date="2016-02-26" data-gpu="gtx1050">Stardew Valley (Demo) — требует GTX 1050 (2016)</li>
-    <li data-genre="action" data-price="paid" data-date="2024-02-08" data-gpu="rtx4070">Helldivers 2 — требует RTX 4070 (2024)</li>
-    <li data-genre="strategy" data-price="free" data-date="2018-11-21" data-gpu="gtx1060">Total War: Arena — требует GTX 1060 (2018)</li>
+    <li data-genre="Шутер от первого лица" data-gpu="GTX 1060">Counter-Strike 2 — требуется GTX 1060</li>
+    <li data-genre="Ролевые экшены" data-gpu="RTX 2060">Cyberpunk 2077 — требуется RTX 2060</li>
+    <li data-genre="Приключенческая ролевая игра" data-gpu="GTX 1050">Hollow Knight — требуется GTX 1050</li>
+    <li data-genre="Стратегии в реальном времени" data-gpu="GTX 750">StarCraft II — требуется GTX 750</li>
+    <li data-genre="Гонки" data-gpu="RTX 3060">Forza Horizon 5 — требуется RTX 3060</li>
   </ul>
 
-  <a href="index.html">⬅ Назад на главную</a>
-
   <script>
-    const gpuHierarchy = {
-      gtx1050: 1,
-      gtx1060: 2,
-      rtx2060: 3,
-      rtx3060: 4,
-      rtx4060: 5,
-      rtx4070: 6,
-      rtx5070: 7,
-      rx6600: 3,
-      rx7600: 5
-    };
+    const genreFilter = document.getElementById("genre");
+    const gpuFilter = document.getElementById("gpu");
+    const games = document.querySelectorAll("#gameList li");
 
-    const searchInput = document.getElementById("searchInput");
-    const genreSelect = document.getElementById("genreSelect");
-    const priceSelect = document.getElementById("priceSelect");
-    const gpuSelect = document.getElementById("gpuSelect");
-    const sortSelect = document.getElementById("sortSelect");
-    const gameList = document.getElementById("gameList");
+    function filterGames() {
+      const genre = genreFilter.value;
+      const gpu = gpuFilter.value;
 
-    function getGames() {
-      return Array.from(gameList.getElementsByTagName("li"));
-    }
+      games.forEach(game => {
+        const matchGenre = !genre || game.dataset.genre === genre;
+        const matchGpu = !gpu || game.dataset.gpu === gpu;
 
-    function filterAndSortGames() {
-      const searchValue = searchInput.value.toLowerCase();
-      const selectedGenre = genreSelect.value;
-      const selectedPrice = priceSelect.value;
-      const selectedGPU = gpuSelect.value;
-      const sortOrder = sortSelect.value;
-
-      let games = getGames();
-
-      games.sort((a, b) => {
-        const dateA = new Date(a.getAttribute("data-date"));
-        const dateB = new Date(b.getAttribute("data-date"));
-        return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
-      });
-
-      games.forEach(li => gameList.appendChild(li));
-
-      games.forEach(li => {
-        const text = li.textContent.toLowerCase();
-        const genre = li.getAttribute("data-genre");
-        const price = li.getAttribute("data-price");
-        const gpu = li.getAttribute("data-gpu");
-
-        const matchesSearch = text.includes(searchValue);
-        const matchesGenre = selectedGenre === "all" || genre === selectedGenre;
-        const matchesPrice = selectedPrice === "all" || price === selectedPrice;
-
-        let matchesGPU = true;
-        if (selectedGPU !== "all") {
-          const selectedPower = gpuHierarchy[selectedGPU] || 0;
-          const gamePower = gpuHierarchy[gpu] || 0;
-          matchesGPU = gamePower <= selectedPower;
+        if (matchGenre && matchGpu) {
+          game.style.display = "block";
+        } else {
+          game.style.display = "none";
         }
-
-        li.style.display = matchesSearch && matchesGenre && matchesPrice && matchesGPU ? "" : "none";
       });
     }
 
-    [searchInput, genreSelect, priceSelect, gpuSelect, sortSelect].forEach(el =>
-      el.addEventListener("input", filterAndSortGames)
-    );
-
-    filterAndSortGames();
+    genreFilter.addEventListener("change", filterGames);
+    gpuFilter.addEventListener("change", filterGames);
   </script>
 </body>
 </html>
