@@ -6,7 +6,7 @@ const gamesData = [
     gpu: "RTX 2060",
     price: "paid",
     release_date: "2022-02-25",
-    rating: "9/10",
+    rating: 9.0,
     cover: "https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg",
     cpu: "Intel i5",
     ram: "16GB"
@@ -17,15 +17,15 @@ const gamesData = [
     gpu: "RTX 2060",
     price: "paid",
     release_date: "2020-12-10",
-    rating: "7/10",
+    rating: 7.0,
     cover: "https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg",
     cpu: "Intel i7",
     ram: "16GB"
-  },
-  // добавляй все игры сюда
+  }
+  // Добавляй остальные игры сюда
 ];
 
-// ====== ФИЛЬТРЫ ======
+// ====== ЭЛЕМЕНТЫ ======
 const searchInput = document.getElementById("searchInput");
 const genreSelect = document.getElementById("genre");
 const gpuSelect = document.getElementById("gpu");
@@ -35,10 +35,9 @@ const resetBtn = document.getElementById("resetBtn");
 const gameList = document.getElementById("gameList");
 const pagination = document.getElementById("pagination");
 
-// Жанры и видеокарты
+// ====== Жанры и видеокарты ======
 const allGenres = [...new Set(gamesData.map(g => g.genre))];
 const allGpus = [...new Set(gamesData.map(g => g.gpu))];
-
 allGenres.forEach(g => genreSelect.innerHTML += `<option value="${g}">${g}</option>`);
 allGpus.forEach(gpu => gpuSelect.innerHTML += `<option value="${gpu}">${gpu}</option>`);
 
@@ -46,6 +45,7 @@ allGpus.forEach(gpu => gpuSelect.innerHTML += `<option value="${gpu}">${gpu}</op
 let currentPage = 1;
 const perPage = 15;
 
+// ====== ОТОБРАЖЕНИЕ ИГР ======
 function displayGames() {
   const searchValue = searchInput.value.toLowerCase();
   const genre = genreSelect.value;
@@ -61,6 +61,7 @@ function displayGames() {
   });
 
   filtered.sort((a,b) => {
+    if(sortOrder === "rating") return b.rating - a.rating;
     const dateA = new Date(a.release_date);
     const dateB = new Date(b.release_date);
     return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
@@ -81,9 +82,17 @@ function displayGames() {
         <h3>${game.name}</h3>
         <p>Жанр: ${game.genre}</p>
         <p>Цена: ${game.price}</p>
-        <p>Дата выхода: ${game.release_date}</p>
+        <p>Рейтинг: ${game.rating}/10</p>
       </div>
     `;
+    // Проверка совместимости GPU
+    const userGpu = "GTX 1060"; // В будущем можно сделать выбор пользователем
+    const compatible = userGpu === game.gpu;
+    const compatSpan = document.createElement('p');
+    compatSpan.textContent = compatible ? "Совместимо" : "Не совместимо";
+    compatSpan.style.color = compatible ? "#00ffcc" : "red";
+    li.querySelector('.game-info').appendChild(compatSpan);
+
     li.addEventListener('click', () => {
       window.location.href = `game-detail.html?name=${encodeURIComponent(game.name)}`;
     });
@@ -113,4 +122,5 @@ resetBtn.addEventListener('click', ()=>{
   displayGames();
 });
 
+// ====== ИНИЦИАЛИЗАЦИЯ ======
 displayGames();
