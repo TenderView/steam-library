@@ -30,7 +30,7 @@
 </head>
 <body>
   <h1>🎮 Steam Library — тестовая база игр</h1>
-  <p>Поиск, жанры и цена:</p>
+  <p>Поиск, жанры, цена и дата выхода:</p>
 
   <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
   
@@ -48,14 +48,19 @@
     <option value="paid">Платные</option>
   </select>
 
+  <select id="sortSelect">
+    <option value="newest">Новые сверху</option>
+    <option value="oldest">Старые сверху</option>
+  </select>
+
   <ul id="gameList">
-    <li data-genre="action" data-price="paid">Cyberpunk 2077 — CD Projekt Red</li>
-    <li data-genre="indie" data-price="paid">Hades — Supergiant Games</li>
-    <li data-genre="rpg" data-price="paid">Elden Ring — FromSoftware</li>
-    <li data-genre="rpg" data-price="paid">Baldur’s Gate 3 — Larian Studios</li>
-    <li data-genre="indie" data-price="free">Stardew Valley (Demo) — ConcernedApe</li>
-    <li data-genre="action" data-price="paid">Helldivers 2 — Arrowhead Game Studios</li>
-    <li data-genre="strategy" data-price="free">Total War: Arena — Creative Assembly</li>
+    <li data-genre="action" data-price="paid" data-date="2020-12-10">Cyberpunk 2077 — CD Projekt Red (2020)</li>
+    <li data-genre="indie" data-price="paid" data-date="2020-09-17">Hades — Supergiant Games (2020)</li>
+    <li data-genre="rpg" data-price="paid" data-date="2022-02-25">Elden Ring — FromSoftware (2022)</li>
+    <li data-genre="rpg" data-price="paid" data-date="2023-08-03">Baldur’s Gate 3 — Larian Studios (2023)</li>
+    <li data-genre="indie" data-price="free" data-date="2016-02-26">Stardew Valley (Demo) — ConcernedApe (2016)</li>
+    <li data-genre="action" data-price="paid" data-date="2024-02-08">Helldivers 2 — Arrowhead Game Studios (2024)</li>
+    <li data-genre="strategy" data-price="free" data-date="2018-11-21">Total War: Arena — Creative Assembly (2018)</li>
   </ul>
 
   <a href="index.html">⬅ Назад на главную</a>
@@ -64,13 +69,28 @@
     const searchInput = document.getElementById("searchInput");
     const genreSelect = document.getElementById("genreSelect");
     const priceSelect = document.getElementById("priceSelect");
+    const sortSelect = document.getElementById("sortSelect");
     const gameList = document.getElementById("gameList");
-    const games = Array.from(gameList.getElementsByTagName("li"));
 
-    function filterGames() {
+    function getGames() {
+      return Array.from(gameList.getElementsByTagName("li"));
+    }
+
+    function filterAndSortGames() {
       const searchValue = searchInput.value.toLowerCase();
       const selectedGenre = genreSelect.value;
       const selectedPrice = priceSelect.value;
+      const sortOrder = sortSelect.value;
+
+      let games = getGames();
+
+      games.sort((a, b) => {
+        const dateA = new Date(a.getAttribute("data-date"));
+        const dateB = new Date(b.getAttribute("data-date"));
+        return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+      });
+
+      games.forEach(li => gameList.appendChild(li));
 
       games.forEach(li => {
         const text = li.textContent.toLowerCase();
@@ -85,9 +105,12 @@
       });
     }
 
-    searchInput.addEventListener("input", filterGames);
-    genreSelect.addEventListener("change", filterGames);
-    priceSelect.addEventListener("change", filterGames);
+    searchInput.addEventListener("input", filterAndSortGames);
+    genreSelect.addEventListener("change", filterAndSortGames);
+    priceSelect.addEventListener("change", filterAndSortGames);
+    sortSelect.addEventListener("change", filterAndSortGames);
+
+    filterAndSortGames();
   </script>
 </body>
 </html>
