@@ -33,16 +33,21 @@ const gamesData = [
     cpu: "Intel i5",
     ram: "8GB"
   },
-  {
-    name: "StarCraft II",
-    genre: "Стратегии в реальном времени",
-    price: "free",
-    release_date: "2018-11-21",
-    rating: "8/10",
-    cover: "https://cdn.akamai.steamstatic.com/steam/apps/393380/header.jpg",
-    gpu: "GTX 750",
-    cpu: "Intel i3",
-    ram: "4GB"
+    {
+  name: "StarCraft II",
+  genre: "Стратегии в реальном времени",
+  price: "free",
+  release_date: "2018-11-21",
+  rating: "8/10",
+  gpu: "GTX 750",
+  cpu: "Intel i5",
+  ram: "8GB",
+  cover: "https://cdn.akamai.steamstatic.com/steam/apps/58190/header.jpg", // официальный хедер StarCraft II
+  screenshots: [
+    "https://cdn.akamai.steamstatic.com/steam/apps/58190/ss_1.jpg",
+    "https://cdn.akamai.steamstatic.com/steam/apps/58190/ss_2.jpg",
+    "https://cdn.akamai.steamstatic.com/steam/apps/58190/ss_3.jpg"
+  ]
   },
   {
     name: "Forza Horizon 5",
