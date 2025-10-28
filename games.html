@@ -15,12 +15,13 @@
     h1 {
       text-align: center;
     }
-    select, input {
+    input, select {
       margin: 10px;
       padding: 8px;
       font-size: 14px;
       border-radius: 5px;
       border: none;
+      width: 200px;
     }
     ul {
       list-style-type: none;
@@ -36,12 +37,21 @@
       text-align: center;
       margin-bottom: 20px;
     }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <h1>🎮 Steam Library Tracker</h1>
 
   <div class="filters">
+    <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
+
     <label for="genre">Жанр:</label>
     <select id="genre">
       <option value="">Все жанры</option>
@@ -109,39 +119,94 @@
       <option>RTX 4080</option>
       <option>RTX 5070</option>
     </select>
+
+    <label for="price">Цена:</label>
+    <select id="price">
+      <option value="">Все игры</option>
+      <option value="free">Бесплатные</option>
+      <option value="paid">Платные</option>
+    </select>
+
+    <label for="sort">Сортировка по дате:</label>
+    <select id="sort">
+      <option value="newest">Новые сверху</option>
+      <option value="oldest">Старые сверху</option>
+    </select>
+
+    <button id="resetBtn">Сбросить фильтры</button>
   </div>
 
   <ul id="gameList">
-    <li data-genre="Шутер от первого лица" data-gpu="GTX 1060">Counter-Strike 2 — требуется GTX 1060</li>
-    <li data-genre="Ролевые экшены" data-gpu="RTX 2060">Cyberpunk 2077 — требуется RTX 2060</li>
-    <li data-genre="Приключенческая ролевая игра" data-gpu="GTX 1050">Hollow Knight — требуется GTX 1050</li>
-    <li data-genre="Стратегии в реальном времени" data-gpu="GTX 750">StarCraft II — требуется GTX 750</li>
-    <li data-genre="Гонки" data-gpu="RTX 3060">Forza Horizon 5 — требуется RTX 3060</li>
+    <li data-genre="Шутер от первого лица" data-gpu="GTX 1060" data-price="paid" data-date="2024-08-01">Counter-Strike 2 — требуется GTX 1060 (2024)</li>
+    <li data-genre="Ролевые экшены" data-gpu="RTX 2060" data-price="paid" data-date="2020-12-10">Cyberpunk 2077 — требуется RTX 2060 (2020)</li>
+    <li data-genre="Приключенческая ролевая игра" data-gpu="GTX 1050" data-price="paid" data-date="2017-02-26">Hollow Knight — требуется GTX 1050 (2017)</li>
+    <li data-genre="Стратегии в реальном времени" data-gpu="GTX 750" data-price="free" data-date="2018-11-21">StarCraft II — требуется GTX 750 (2018)</li>
+    <li data-genre="Гонки" data-gpu="RTX 3060" data-price="paid" data-date="2023-02-08">Forza Horizon 5 — требуется RTX 3060 (2023)</li>
   </ul>
 
+  <a href="index.html">⬅ Назад на главную</a>
+
   <script>
-    const genreFilter = document.getElementById("genre");
-    const gpuFilter = document.getElementById("gpu");
-    const games = document.querySelectorAll("#gameList li");
+    const searchInput = document.getElementById("searchInput");
+    const genreSelect = document.getElementById("genre");
+    const gpuSelect = document.getElementById("gpu");
+    const priceSelect = document.getElementById("price");
+    const sortSelect = document.getElementById("sort");
+    const resetBtn = document.getElementById("resetBtn");
+    const gameList = document.getElementById("gameList");
 
-    function filterGames() {
-      const genre = genreFilter.value;
-      const gpu = gpuFilter.value;
+    function getGames() {
+      return Array.from(gameList.getElementsByTagName("li"));
+    }
 
-      games.forEach(game => {
-        const matchGenre = !genre || game.dataset.genre === genre;
-        const matchGpu = !gpu || game.dataset.gpu === gpu;
+    function filterAndSortGames() {
+      const searchValue = searchInput.value.toLowerCase();
+      const genre = genreSelect.value;
+      const gpu = gpuSelect.value;
+      const price = priceSelect.value;
+      const sortOrder = sortSelect.value;
 
-        if (matchGenre && matchGpu) {
-          game.style.display = "block";
-        } else {
-          game.style.display = "none";
-        }
+      let games = getGames();
+
+      // Сортировка по дате
+      games.sort((a, b) => {
+        const dateA = new Date(a.dataset.date);
+        const dateB = new Date(b.dataset.date);
+        return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+      });
+
+      games.forEach(li => gameList.appendChild(li));
+
+      // Фильтры
+      games.forEach(li => {
+        const text = li.textContent.toLowerCase();
+        const matchesSearch = text.includes(searchValue);
+        const matchesGenre = !genre || li.dataset.genre === genre;
+        const matchesGpu = !gpu || li.dataset.gpu === gpu;
+        const matchesPrice = !price || li.dataset.price === price;
+
+        li.style.display = matchesSearch && matchesGenre && matchesGpu && matchesPrice ? "" : "none";
       });
     }
 
-    genreFilter.addEventListener("change", filterGames);
-    gpuFilter.addEventListener("change", filterGames);
+    // Сброс фильтров
+    resetBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      genreSelect.value = "";
+      gpuSelect.value = "";
+      priceSelect.value = "";
+      sortSelect.value = "newest";
+      filterAndSortGames();
+    });
+
+    // События
+    searchInput.addEventListener("input", filterAndSortGames);
+    genreSelect.addEventListener("change", filterAndSortGames);
+    gpuSelect.addEventListener("change", filterAndSortGames);
+    priceSelect.addEventListener("change", filterAndSortGames);
+    sortSelect.addEventListener("change", filterAndSortGames);
+
+    filterAndSortGames();
   </script>
 </body>
 </html>
