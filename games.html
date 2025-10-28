@@ -1,87 +1,36 @@
-<div class="filters">
-  <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam Library Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🎮 Steam Library Tracker</h1>
 
-  <select id="genreSelect">
-    <option value="all">Все жанры</option>
-    <!-- Полный список жанров -->
-    <option>Шутер от первого лица</option>
-    <option>Шутер от третьего лица</option>
-    <option>Слэшеры</option>
-    <option>Аркады и ритм-игры</option>
-    <option>Платформеры и раннеры</option>
-    <option>Shoot 'em up</option>
-    <option>Файтинги и боевые искусства</option>
-    <option>Поиск предметов</option>
-    <option>Казуальные</option>
-    <option>Метроидвания</option>
-    <option>Головоломки</option>
-    <option>Приключенческая ролевая игра</option>
-    <option>Визуальные новеллы</option>
-    <option>Глубокий сюжет</option>
-    <option>Ролевые экшены</option>
-    <option>Стратегии и тактические ролевые</option>
-    <option>Японские ролевые</option>
-    <option>Рогалики и упрощённые рогалики</option>
-    <option>Пошаговые ролевые</option>
-    <option>Групповая ролевая игра</option>
-    <option>Симуляторы строительства и автоматизации</option>
-    <option>Симуляторы хобби и работы</option>
-    <option>Симуляторы свиданий</option>
-    <option>Симуляторы фермерства и крафтинга</option>
-    <option>Симуляторы космоса и полётов</option>
-    <option>Симуляторы жизни и иммерсивные симуляторы</option>
-    <option>Песочницы и симуляторы физики</option>
-    <option>Пошаговые стратегии</option>
-    <option>Стратегии в реальном времени</option>
-    <option>Башенная защита</option>
-    <option>Карточные и настольные</option>
-    <option>Строительство городов и колонизация</option>
-    <option>Глобальные стратегии и 4X-игры</option>
-    <option>Военные стратегии</option>
-    <option>Спортивные симуляторы и менеджеры</option>
-    <option>Гонки</option>
-    <option>Симулятор гонок</option>
-    <option>Охота и рыбалка</option>
-    <option>Командный спорт</option>
-    <option>Индивидуальный спорт</option>
-    <option>Спорт</option>
-  </select>
+  <div class="filters">
+    <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
 
-  <select id="gpuSelect">
-    <option value="all">Все видеокарты</option>
-    <option>GTX 750</option>
-    <option>GTX 960</option>
-    <option>GTX 970</option>
-    <option>GTX 1050</option>
-    <option>GTX 1060</option>
-    <option>GTX 1070</option>
-    <option>GTX 1080</option>
-    <option>RTX 2060</option>
-    <option>RTX 2070</option>
-    <option>RTX 2080</option>
-    <option>RTX 3060</option>
-    <option>RTX 3070</option>
-    <option>RTX 3080</option>
-    <option>RTX 4060</option>
-    <option>RTX 4070</option>
-    <option>RTX 4080</option>
-    <option>RTX 5070</option>
-  </select>
+    <select id="genre"></select>
+    <select id="gpu"></select>
+    <select id="price">
+      <option value="">Все игры</option>
+      <option value="free">Бесплатные</option>
+      <option value="paid">Платные</option>
+    </select>
 
-  <select id="priceSelect">
-    <option value="all">Все игры</option>
-    <option value="free">Бесплатные</option>
-    <option value="paid">Платные</option>
-  </select>
+    <select id="sort">
+      <option value="newest">Новые сверху</option>
+      <option value="oldest">Старые сверху</option>
+    </select>
 
-  <select id="sortSelect">
-    <option value="newest">Новые сверху</option>
-    <option value="oldest">Старые сверху</option>
-  </select>
+    <button id="resetBtn">Сбросить фильтры</button>
+  </div>
 
-  <button id="resetBtn">Сбросить фильтры</button>
-</div>
+  <ul id="gameList"></ul>
+  <div class="pagination" id="pagination"></div>
 
-<ul id="gameList"></ul>
-
-<div class="pagination" id="pagination"></div>
+  <script src="main.js"></script>
+</body>
+</html>
