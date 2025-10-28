@@ -1,0 +1,133 @@
+/* Общие стили страницы */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Контейнер для фильтров */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filters select, .filters input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+}
+
+/* Список игр */
+#gameList {
+    list-style: none;
+    padding: 0;
+}
+
+/* Карточка игры */
+.game-card {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+}
+
+/* Шапка карточки */
+.game-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.game-cover {
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.game-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 20px;
+}
+
+.game-info p {
+    margin: 3px 0;
+    font-size: 14px;
+}
+
+/* Кнопки */
+button {
+    cursor: pointer;
+    padding: 6px 12px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #00ffcc;
+    color: #000;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #00d1a6;
+}
+
+/* Раскрываемые характеристики */
+.game-details {
+    margin-top: 10px;
+    background-color: #292929;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.game-details ul {
+    padding-left: 20px;
+}
+
+.game-details li {
+    margin: 5px 0;
+}
+
+/* Комментарии */
+.comments-section {
+    margin-top: 15px;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+}
+
+.comments-list {
+    list-style: none;
+    padding: 0;
+}
+
+.comments-list li {
+    background-color: #2a2a2a;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.comment-input {
+    width: calc(100% - 90px);
+    padding: 6px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 5px;
+}
