@@ -148,3 +148,30 @@
     <script src="main.js"></script>
 </body>
 </html>
+<div class="games-grid" id="gamesGrid"></div>
+
+<script>
+const gamesGrid = document.getElementById('gamesGrid');
+const allGames = JSON.parse(localStorage.getItem('games')) || [];
+
+allGames.forEach(game => {
+    const card = document.createElement('div');
+    card.className = 'game-card';
+    card.innerHTML = `
+        <div class="game-card-image">
+            <img src="${game.cover}" alt="${game.name}" 
+                 onerror="this.src='https://via.placeholder.com/300x400/2a2a2a/00ffcc?text=No+Image'">
+        </div>
+        <div class="game-card-info">
+            <h3 class="game-card-title">${game.name}</h3>
+            <p class="game-card-meta-item genre">${game.genre}</p>
+            <p class="game-card-meta-item price">${game.price === 'free' ? '🆓 Бесплатная' : '💲 Платная'}</p>
+        </div>
+    `;
+    card.addEventListener('click', () => {
+        localStorage.setItem('selectedGame', JSON.stringify(game));
+        window.location.href = 'game-detail.html';
+    });
+    gamesGrid.appendChild(card);
+});
+</script>
