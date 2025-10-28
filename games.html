@@ -30,7 +30,7 @@
 </head>
 <body>
   <h1>🎮 Steam Library — тестовая база игр</h1>
-  <p>Поиск, жанры, цена и дата выхода:</p>
+  <p>Поиск, жанры, цена, дата выхода и минимальные требования по видеокарте:</p>
 
   <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
   
@@ -48,27 +48,53 @@
     <option value="paid">Платные</option>
   </select>
 
+  <select id="gpuSelect">
+    <option value="all">Все видеокарты</option>
+    <option value="gtx1050">GTX 1050</option>
+    <option value="gtx1060">GTX 1060</option>
+    <option value="rtx2060">RTX 2060</option>
+    <option value="rtx3060">RTX 3060</option>
+    <option value="rtx4060">RTX 4060</option>
+    <option value="rtx4070">RTX 4070</option>
+    <option value="rtx5070">RTX 5070</option>
+    <option value="rx6600">Radeon RX 6600</option>
+    <option value="rx7600">Radeon RX 7600</option>
+  </select>
+
   <select id="sortSelect">
     <option value="newest">Новые сверху</option>
     <option value="oldest">Старые сверху</option>
   </select>
 
   <ul id="gameList">
-    <li data-genre="action" data-price="paid" data-date="2020-12-10">Cyberpunk 2077 — CD Projekt Red (2020)</li>
-    <li data-genre="indie" data-price="paid" data-date="2020-09-17">Hades — Supergiant Games (2020)</li>
-    <li data-genre="rpg" data-price="paid" data-date="2022-02-25">Elden Ring — FromSoftware (2022)</li>
-    <li data-genre="rpg" data-price="paid" data-date="2023-08-03">Baldur’s Gate 3 — Larian Studios (2023)</li>
-    <li data-genre="indie" data-price="free" data-date="2016-02-26">Stardew Valley (Demo) — ConcernedApe (2016)</li>
-    <li data-genre="action" data-price="paid" data-date="2024-02-08">Helldivers 2 — Arrowhead Game Studios (2024)</li>
-    <li data-genre="strategy" data-price="free" data-date="2018-11-21">Total War: Arena — Creative Assembly (2018)</li>
+    <li data-genre="action" data-price="paid" data-date="2020-12-10" data-gpu="rtx2060">Cyberpunk 2077 — требует RTX 2060 (2020)</li>
+    <li data-genre="indie" data-price="paid" data-date="2020-09-17" data-gpu="gtx1050">Hades — требует GTX 1050 (2020)</li>
+    <li data-genre="rpg" data-price="paid" data-date="2022-02-25" data-gpu="rtx3060">Elden Ring — требует RTX 3060 (2022)</li>
+    <li data-genre="rpg" data-price="paid" data-date="2023-08-03" data-gpu="rtx4060">Baldur’s Gate 3 — требует RTX 4060 (2023)</li>
+    <li data-genre="indie" data-price="free" data-date="2016-02-26" data-gpu="gtx1050">Stardew Valley (Demo) — требует GTX 1050 (2016)</li>
+    <li data-genre="action" data-price="paid" data-date="2024-02-08" data-gpu="rtx4070">Helldivers 2 — требует RTX 4070 (2024)</li>
+    <li data-genre="strategy" data-price="free" data-date="2018-11-21" data-gpu="gtx1060">Total War: Arena — требует GTX 1060 (2018)</li>
   </ul>
 
   <a href="index.html">⬅ Назад на главную</a>
 
   <script>
+    const gpuHierarchy = {
+      gtx1050: 1,
+      gtx1060: 2,
+      rtx2060: 3,
+      rtx3060: 4,
+      rtx4060: 5,
+      rtx4070: 6,
+      rtx5070: 7,
+      rx6600: 3,
+      rx7600: 5
+    };
+
     const searchInput = document.getElementById("searchInput");
     const genreSelect = document.getElementById("genreSelect");
     const priceSelect = document.getElementById("priceSelect");
+    const gpuSelect = document.getElementById("gpuSelect");
     const sortSelect = document.getElementById("sortSelect");
     const gameList = document.getElementById("gameList");
 
@@ -80,6 +106,7 @@
       const searchValue = searchInput.value.toLowerCase();
       const selectedGenre = genreSelect.value;
       const selectedPrice = priceSelect.value;
+      const selectedGPU = gpuSelect.value;
       const sortOrder = sortSelect.value;
 
       let games = getGames();
@@ -96,19 +123,26 @@
         const text = li.textContent.toLowerCase();
         const genre = li.getAttribute("data-genre");
         const price = li.getAttribute("data-price");
+        const gpu = li.getAttribute("data-gpu");
 
         const matchesSearch = text.includes(searchValue);
         const matchesGenre = selectedGenre === "all" || genre === selectedGenre;
         const matchesPrice = selectedPrice === "all" || price === selectedPrice;
 
-        li.style.display = matchesSearch && matchesGenre && matchesPrice ? "" : "none";
+        let matchesGPU = true;
+        if (selectedGPU !== "all") {
+          const selectedPower = gpuHierarchy[selectedGPU] || 0;
+          const gamePower = gpuHierarchy[gpu] || 0;
+          matchesGPU = gamePower <= selectedPower;
+        }
+
+        li.style.display = matchesSearch && matchesGenre && matchesPrice && matchesGPU ? "" : "none";
       });
     }
 
-    searchInput.addEventListener("input", filterAndSortGames);
-    genreSelect.addEventListener("change", filterAndSortGames);
-    priceSelect.addEventListener("change", filterAndSortGames);
-    sortSelect.addEventListener("change", filterAndSortGames);
+    [searchInput, genreSelect, priceSelect, gpuSelect, sortSelect].forEach(el =>
+      el.addEventListener("input", filterAndSortGames)
+    );
 
     filterAndSortGames();
   </script>
