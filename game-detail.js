@@ -318,4 +318,40 @@ function setupComments(gameName) {
     }
     
     // Функция добавления комментария
-    function add
+    function addComment() {
+        const text = commentInput.value.trim();
+        if (text) {
+            comments.push(text);
+            localStorage.setItem(`comments_${gameName}`, JSON.stringify(comments));
+            renderComments();
+            commentInput.value = '';
+            
+            // Анимация добавления
+            const newComment = commentsList.lastElementChild;
+            if (newComment) {
+                newComment.style.opacity = '0';
+                newComment.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    newComment.style.transition = 'all 0.3s ease';
+                    newComment.style.opacity = '1';
+                    newComment.style.transform = 'translateY(0)';
+                }, 10);
+            }
+        }
+    }
+    
+    // Обработчики событий
+    addCommentBtn.addEventListener('click', addComment);
+    commentInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            addComment();
+        }
+    });
+    
+    // Первоначальное отображение комментариев
+    renderComments();
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', initializeGameDetailPage);
