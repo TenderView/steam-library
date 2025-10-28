@@ -1,36 +1,82 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Настройки - Steam Library</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки - Steam Library Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <a class="back-link" href="games.html">⬅ Назад к играм</a>
-  
-  <div class="game-container">
-    <div class="game-info">
-      <h1>⚙️ Настройки совместимости</h1>
-      
-      <div class="characteristics">
-        <h3>Выберите вашу видеокарту:</h3>
-        <p>Это нужно для проверки совместимости игр с вашим ПК</p>
-        
-        <select id="gpuSelect" class="settings-select">
-          <option value="">-- Выберите видеокарту --</option>
-        </select>
-        
-        <button id="saveSettings" class="save-btn">💾 Сохранить настройки</button>
-      </div>
-      
-      <div class="characteristics" style="margin-top: 20px;">
-        <h3>Текущие настройки:</h3>
-        <p id="currentSettings">Видеокарта: не выбрана</p>
-      </div>
-    </div>
-  </div>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">🎮</span>
+                    <span class="logo-text">SteamTracker</span>
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="games.html" class="nav-link">Каталог игр</a>
+                    <a href="settings.html" class="nav-link active">Настройки</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-  <script src="settings.js"></script>
+    <main class="container">
+        <section class="settings-section">
+            <div class="settings-card">
+                <h2 class="settings-title">⚙️ Настройки совместимости</h2>
+                <p class="settings-description">
+                    Укажите характеристики вашего ПК для точной проверки совместимости игр. 
+                    Это поможет нам определить, какие игры будут работать на вашем компьютере.
+                </p>
+
+                <div class="settings-form">
+                    <div class="form-group">
+                        <label class="form-label">Ваша видеокарта</label>
+                        <select id="gpuSelect" class="form-select">
+                            <option value="">-- Выберите видеокарту --</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Ваш процессор</label>
+                        <select id="cpuSelect" class="form-select">
+                            <option value="">-- Выберите процессор --</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Оперативная память</label>
+                        <select id="ramSelect" class="form-select">
+                            <option value="">-- Выберите объем памяти --</option>
+                            <option value="4GB">4 GB</option>
+                            <option value="8GB">8 GB</option>
+                            <option value="12GB">12 GB</option>
+                            <option value="16GB">16 GB</option>
+                            <option value="32GB">32 GB</option>
+                        </select>
+                    </div>
+                    
+                    <button id="saveSettings" class="btn btn-primary">💾 Сохранить настройки</button>
+                </div>
+                
+                <div class="current-settings">
+                    <h3>Текущие настройки:</h3>
+                    <p id="settingsInfo" class="settings-info">Настройки не сохранены</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Steam Library Tracker. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="settings.js"></script>
 </body>
 </html>
