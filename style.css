@@ -1173,3 +1173,24 @@ h1, h2, h3, h4, h5, h6 {
     height: 250px;
   }
 }
+/* Карусель скриншотов */
+.screenshots-carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 2rem;
+}
+
+.screenshots-track {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.screenshot-slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 1rem;
+}
