@@ -9,8 +9,12 @@
 <body>
   <h1 class="page-title">🎮 Steam Library Tracker</h1>
 
+  <div class="header-actions">
+    <a href="settings.html" class="settings-btn">⚙️ Моя видеокарта</a>
+  </div>
+
   <div class="filters">
-    <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
+    <input type="text" id="searchInput" placeholder="🔍 Искать игру...">
     <select id="genreSelect">
       <option value="">Все жанры</option>
     </select>
@@ -19,15 +23,17 @@
     </select>
     <select id="priceSelect">
       <option value="">Все игры</option>
-      <option value="free">Бесплатные</option>
-      <option value="paid">Платные</option>
+      <option value="free">🆓 Бесплатные</option>
+      <option value="paid">💲 Платные</option>
     </select>
     <select id="sortSelect">
-      <option value="newest">Новые сверху</option>
-      <option value="oldest">Старые сверху</option>
+      <option value="newest">🆕 Сначала новые</option>
+      <option value="oldest">📅 Сначала старые</option>
     </select>
-    <button id="resetBtn">Сбросить фильтры</button>
+    <button id="resetBtn">🔄 Сбросить</button>
   </div>
+
+  <div id="gamesCount" class="games-count"></div>
 
   <ul id="gameList" class="game-list"></ul>
   <div id="pagination" class="pagination"></div>
