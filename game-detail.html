@@ -1,53 +1,49 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Детали игры</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали игры - Steam Library Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <a class="back-link" href="games.html">⬅ Назад к играм</a>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">🎮</span>
+                    <span class="logo-text">SteamTracker</span>
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="games.html" class="nav-link">Каталог игр</a>
+                    <a href="settings.html" class="nav-link">Настройки</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-  <div class="game-container">
-    <img id="gameCover" class="game-cover" src="" alt="Обложка игры">
-    <div class="game-info">
-      <h1 id="gameName">Название игры</h1>
-      <p id="gameGenre">Жанр: </p>
-      <p id="gamePrice">Цена: </p>
-      <p id="gameRelease">Дата выхода: </p>
-      <p id="gameRating">Оценка: </p>
+    <main class="container">
+        <a href="games.html" class="back-link">
+            ← Назад к каталогу
+        </a>
 
-      <p id="compatibility" class="compatibility">Совместимость: </p>
+        <div id="gameDetailContainer">
+            <!-- Контент будет заполнен JavaScript -->
+            <div class="loading-indicator">
+                <div class="loading-spinner"></div>
+                <p>Загрузка информации об игре...</p>
+            </div>
+        </div>
+    </main>
 
-      <div class="characteristics">
-        <h4>Минимальные требования:</h4>
-        <p id="gameCPU">Процессор: </p>
-        <p id="gameGPU">Видеокарта: </p>
-        <p id="gameRAM">Оперативная память: </p>
-      </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Steam Library Tracker. Все права защищены.</p>
+        </div>
+    </footer>
 
-      <div class="screenshots" id="screenshots">
-        <!-- Заменяем блок скриншотов на этот -->
-<div class="screenshots-section">
-  <h4>Скриншоты:</h4>
-  <div class="screenshots-container">
-    <div class="screenshots-track" id="screenshotsTrack"></div>
-    <button class="screenshot-nav screenshot-prev">❮</button>
-    <button class="screenshot-nav screenshot-next">❯</button>
-    <div class="screenshots-dots" id="screenshotsDots"></div>
-  </div>
-      </div>
-
-      <div class="comments-section">
-        <h4>Комментарии:</h4>
-        <ul class="comments-list" id="commentsList"></ul>
-        <input type="text" class="comment-input" id="commentInput" placeholder="Написать комментарий...">
-        <button id="addCommentBtn">Добавить</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="game-detail.js"></script>
+    <script src="game-detail.js"></script>
 </body>
 </html>
