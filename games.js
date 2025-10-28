@@ -1,4 +1,3 @@
-```javascript
 // games.js - данные игр и создание карточек
 const gamesData = [
   {
@@ -97,4 +96,3 @@ function createGameCard(game) {
 
   return li;
 }
-```
