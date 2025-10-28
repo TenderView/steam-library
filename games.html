@@ -30,7 +30,7 @@
 </head>
 <body>
   <h1>🎮 Steam Library — тестовая база игр</h1>
-  <p>Поиск и фильтрация по жанрам:</p>
+  <p>Поиск, жанры и цена:</p>
 
   <input type="text" id="searchInput" placeholder="Ищи игру по названию...">
   
@@ -42,14 +42,20 @@
     <option value="strategy">Strategy</option>
   </select>
 
+  <select id="priceSelect">
+    <option value="all">Все игры</option>
+    <option value="free">Бесплатные</option>
+    <option value="paid">Платные</option>
+  </select>
+
   <ul id="gameList">
-    <li data-genre="action">Cyberpunk 2077 — CD Projekt Red</li>
-    <li data-genre="indie">Hades — Supergiant Games</li>
-    <li data-genre="rpg">Elden Ring — FromSoftware</li>
-    <li data-genre="rpg">Baldur’s Gate 3 — Larian Studios</li>
-    <li data-genre="indie">Stardew Valley — ConcernedApe</li>
-    <li data-genre="action">Helldivers 2 — Arrowhead Game Studios</li>
-    <li data-genre="strategy">Total War: Warhammer III — Creative Assembly</li>
+    <li data-genre="action" data-price="paid">Cyberpunk 2077 — CD Projekt Red</li>
+    <li data-genre="indie" data-price="paid">Hades — Supergiant Games</li>
+    <li data-genre="rpg" data-price="paid">Elden Ring — FromSoftware</li>
+    <li data-genre="rpg" data-price="paid">Baldur’s Gate 3 — Larian Studios</li>
+    <li data-genre="indie" data-price="free">Stardew Valley (Demo) — ConcernedApe</li>
+    <li data-genre="action" data-price="paid">Helldivers 2 — Arrowhead Game Studios</li>
+    <li data-genre="strategy" data-price="free">Total War: Arena — Creative Assembly</li>
   </ul>
 
   <a href="index.html">⬅ Назад на главную</a>
@@ -57,26 +63,31 @@
   <script>
     const searchInput = document.getElementById("searchInput");
     const genreSelect = document.getElementById("genreSelect");
+    const priceSelect = document.getElementById("priceSelect");
     const gameList = document.getElementById("gameList");
     const games = Array.from(gameList.getElementsByTagName("li"));
 
     function filterGames() {
       const searchValue = searchInput.value.toLowerCase();
       const selectedGenre = genreSelect.value;
+      const selectedPrice = priceSelect.value;
 
       games.forEach(li => {
         const text = li.textContent.toLowerCase();
         const genre = li.getAttribute("data-genre");
+        const price = li.getAttribute("data-price");
 
         const matchesSearch = text.includes(searchValue);
         const matchesGenre = selectedGenre === "all" || genre === selectedGenre;
+        const matchesPrice = selectedPrice === "all" || price === selectedPrice;
 
-        li.style.display = matchesSearch && matchesGenre ? "" : "none";
+        li.style.display = matchesSearch && matchesGenre && matchesPrice ? "" : "none";
       });
     }
 
     searchInput.addEventListener("input", filterGames);
     genreSelect.addEventListener("change", filterGames);
+    priceSelect.addEventListener("change", filterGames);
   </script>
 </body>
 </html>
