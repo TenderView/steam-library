@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "Cyberpunk 2077",
     "genre": "Ролевые экшены",
     "price": "paid",
@@ -11,10 +12,14 @@
     "ram": "12 GB",
     "screenshots": [
       "https://cdn.akamai.steamstatic.com/steam/apps/1091500/ss_1.jpg",
-      "https://cdn.akamai.steamstatic.com/steam/apps/1091500/ss_2.jpg"
-    ]
+      "https://cdn.akamai.steamstatic.com/steam/apps/1091500/ss_2.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/1091500/ss_3.jpg"
+    ],
+    "description": "Cyberpunk 2077 — приключенческая ролевая игра, действие которой происходит в мегаполисе Найт-Сити, где власть, роскошь и модификации тела ценятся выше всего.",
+    "badge": "popular"
   },
   {
+    "id": 2,
     "name": "Elden Ring",
     "genre": "РПГ",
     "price": "paid",
@@ -26,7 +31,84 @@
     "ram": "12 GB",
     "screenshots": [
       "https://cdn.akamai.steamstatic.com/steam/apps/1245620/ss_1.jpg",
-      "https://cdn.akamai.steamstatic.com/steam/apps/1245620/ss_2.jpg"
-    ]
+      "https://cdn.akamai.steamstatic.com/steam/apps/1245620/ss_2.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/1245620/ss_3.jpg"
+    ],
+    "description": "Elden Ring — новая ролевая игра с фэнтезийным сеттингом, разработанная компаниями FromSoftware и Bandai Namco.",
+    "badge": "new"
+  },
+  {
+    "id": 3,
+    "name": "Hollow Knight",
+    "genre": "Приключенческая ролевая игра",
+    "price": "paid",
+    "release_date": "2017-02-26",
+    "rating": "9/10",
+    "cover": "https://cdn.akamai.steamstatic.com/steam/apps/367520/header.jpg",
+    "gpu": "GTX 1050",
+    "cpu": "Intel Core i5",
+    "ram": "8 GB",
+    "screenshots": [
+      "https://cdn.akamai.steamstatic.com/steam/apps/367520/ss_1.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/367520/ss_2.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/367520/ss_3.jpg"
+    ],
+    "description": "Hollow Knight — эпическое приключение в огромном разрушенном королевстве, полном насекомых и героев."
+  },
+  {
+    "id": 4,
+    "name": "StarCraft II",
+    "genre": "Стратегии в реальном времени",
+    "price": "free",
+    "release_date": "2018-11-21",
+    "rating": "8/10",
+    "cover": "https://cdn.akamai.steamstatic.com/steam/apps/58190/header.jpg",
+    "gpu": "GTX 750",
+    "cpu": "Intel Core i5",
+    "ram": "8 GB",
+    "screenshots": [
+      "https://cdn.akamai.steamstatic.com/steam/apps/58190/ss_1.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/58190/ss_2.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/58190/ss_3.jpg"
+    ],
+    "description": "StarCraft II — стратегия в реальном времени, продолжающая легендарную серию StarCraft."
+  },
+  {
+    "id": 5,
+    "name": "Forza Horizon 5",
+    "genre": "Гонки",
+    "price": "paid",
+    "release_date": "2023-02-08",
+    "rating": "9/10",
+    "cover": "https://cdn.akamai.steamstatic.com/steam/apps/1551360/header.jpg",
+    "gpu": "RTX 3060",
+    "cpu": "Intel Core i5",
+    "ram": "16 GB",
+    "screenshots": [
+      "https://cdn.akamai.steamstatic.com/steam/apps/1551360/ss_1.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/1551360/ss_2.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/1551360/ss_3.jpg"
+    ],
+    "description": "Forza Horizon 5 — самая масштабная и разнообразная игра серии Horizon, действие которой происходит в захватывающих пейзажах Мексики.",
+    "badge": "new"
+  },
+  {
+    "id": 6,
+    "name": "Counter-Strike 2",
+    "genre": "Шутер",
+    "price": "free",
+    "release_date": "2023-09-27",
+    "rating": "8/10",
+    "cover": "https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg",
+    "gpu": "GTX 1060",
+    "cpu": "Intel Core i5",
+    "ram": "8 GB",
+    "screenshots": [
+      "https://cdn.akamai.steamstatic.com/steam/apps/730/ss_1.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/730/ss_2.jpg",
+      "https://cdn.akamai.steamstatic.com/steam/apps/730/ss_3.jpg"
+    ],
+    "description": "Counter-Strike 2 — это крупнейший технологический скачок в истории CS, с новыми возможностями и обновлениями.",
+    "badge": "popular"
   }
 ]
