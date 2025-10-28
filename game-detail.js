@@ -47,3 +47,91 @@ function checkCompatibility(gameGPU) {
     compatibilityEl.className = "compatibility";
   }
 }
+// Карусель скриншотов
+let currentScreenshotIndex = 0;
+let screenshotsData = [];
+
+function loadScreenshots(screenshots) {
+  const track = document.getElementById('screenshotsTrack');
+  const dots = document.getElementById('screenshotsDots');
+  
+  if (!track) return;
+  
+  track.innerHTML = '';
+  dots.innerHTML = '';
+  screenshotsData = screenshots || [
+    'https://via.placeholder.com/600x340/1e1e1e/00ffcc?text=Скриншот+1',
+    'https://via.placeholder.com/600x340/1e1e1e/00ffcc?text=Скриншот+2',
+    'https://via.placeholder.com/600x340/1e1e1e/00ffcc?text=Скриншот+3'
+  ];
+
+  // Создаем слайды
+  screenshotsData.forEach((src, index) => {
+    const slide = document.createElement('div');
+    slide.className = 'screenshot-slide';
+    slide.innerHTML = `<img src="${src}" alt="Скриншот ${index + 1}" loading="lazy">`;
+    track.appendChild(slide);
+
+    // Создаем точки навигации
+    const dot = document.createElement('button');
+    dot.className = 'screenshot-dot';
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToScreenshot(index));
+    dots.appendChild(dot);
+  });
+
+  // Обновляем трек
+  updateScreenshotsTrack();
+  
+  // Настраиваем навигацию
+  setupScreenshotsNavigation();
+}
+
+function setupScreenshotsNavigation() {
+  const prevBtn = document.querySelector('.screenshot-prev');
+  const nextBtn = document.querySelector('.screenshot-next');
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      currentScreenshotIndex = (currentScreenshotIndex - 1 + screenshotsData.length) % screenshotsData.length;
+      updateScreenshotsTrack();
+    });
+  }
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      currentScreenshotIndex = (currentScreenshotIndex + 1) % screenshotsData.length;
+      updateScreenshotsTrack();
+    });
+  }
+  
+  // Добавляем клавиатурную навигацию
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      currentScreenshotIndex = (currentScreenshotIndex - 1 + screenshotsData.length) % screenshotsData.length;
+      updateScreenshotsTrack();
+    } else if (e.key === 'ArrowRight') {
+      currentScreenshotIndex = (currentScreenshotIndex + 1) % screenshotsData.length;
+      updateScreenshotsTrack();
+    }
+  });
+}
+
+function updateScreenshotsTrack() {
+  const track = document.getElementById('screenshotsTrack');
+  const dots = document.querySelectorAll('.screenshot-dot');
+  
+  if (track) {
+    track.style.transform = `translateX(-${currentScreenshotIndex * 100}%)`;
+  }
+  
+  // Обновляем активную точку
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentScreenshotIndex);
+  });
+}
+
+function goToScreenshot(index) {
+  currentScreenshotIndex = index;
+  updateScreenshotsTrack();
+}
