@@ -44,3 +44,30 @@
   <script src="main.js"></script>
 </body>
 </html>
+<!-- Добавляем после существующих фильтров -->
+<div class="advanced-filters">
+  <h4>🔍 Расширенные фильтры:</h4>
+  <div class="filter-group">
+    <select id="cpuSelect">
+      <option value="">Все процессоры</option>
+    </select>
+    
+    <select id="ramSelect">
+      <option value="">Вся память</option>
+    </select>
+    
+    <div class="date-filters">
+      <input type="date" id="dateFrom" placeholder="Дата от">
+      <input type="date" id="dateTo" placeholder="Дата до">
+      <button id="clearDates">🗑️</button>
+    </div>
+  </div>
+</div>
+
+<!-- Обновляем сортировку -->
+<select id="sortSelect">
+  <option value="newest">🆕 Сначала новые</option>
+  <option value="oldest">📅 Сначала старые</option>
+  <option value="rating">⭐ По рейтингу</option>
+  <option value="name">🔤 По названию</option>
+</select>
